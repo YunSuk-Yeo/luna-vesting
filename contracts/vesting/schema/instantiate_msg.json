@@ -38,8 +38,7 @@
       "required": [
         "bluna_token",
         "hub_contract",
-        "reward_contract",
-        "validator"
+        "reward_contract"
       ],
       "properties": {
         "bluna_token": {
@@ -49,9 +48,6 @@
           "type": "string"
         },
         "reward_contract": {
-          "type": "string"
-        },
-        "validator": {
           "type": "string"
         }
       }

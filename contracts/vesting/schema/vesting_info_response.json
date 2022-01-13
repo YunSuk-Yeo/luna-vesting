@@ -44,7 +44,7 @@
       "type": "string"
     },
     "Denom": {
-      "anyOf": [
+      "oneOf": [
         {
           "type": "object",
           "required": [
