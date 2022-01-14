@@ -45,10 +45,10 @@ pub enum QueryMsg {
 
 | columbus-5 | bombay-12 |
 | ---------- | --------- |
-| N/A        | 33633     |
+| N/A        | 33811     |
 
 ### Deployed Contract Address
 
 | columbus-5 | bombay-12                                    |
 | ---------- | -------------------------------------------- |
-| N/A        | terra17ul6te7h9namdk3zwjy63d994ctjd27nymacpd |
+| N/A        | terra1yrth9zvzdy3kt7nf3j97l30y2au2q5p3dwfu5a |

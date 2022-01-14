@@ -8,8 +8,8 @@ use common::vesting::{
 use cosmwasm_std::{
     from_binary,
     testing::{mock_env, mock_info, MOCK_CONTRACT_ADDR},
-    to_binary, Addr, Attribute, BankMsg, Coin, ContractResult, Decimal, Reply, Response, StdError,
-    SubMsg, SubMsgExecutionResponse, Timestamp, Uint128, WasmMsg,
+    to_binary, Addr, Attribute, BankMsg, Coin, ContractResult, Reply, Response, StdError, SubMsg,
+    SubMsgExecutionResponse, Timestamp, Uint128, WasmMsg,
 };
 use cw20::{Cw20ExecuteMsg, Denom};
 
@@ -25,7 +25,6 @@ fn proper_initialization() {
             start_time: "100".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -69,7 +68,6 @@ fn proper_initialization_enable_staking() {
             start_time: "100".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -114,7 +112,6 @@ fn invalid_start_time_initialization() {
             start_time: "100".to_string(),
             end_time: "100".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -144,7 +141,6 @@ fn invalid_end_time_initialization() {
             start_time: "100".to_string(),
             end_time: "100".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -174,7 +170,6 @@ fn invalid_initialization_enable_staking_without_staking_info() {
             start_time: "100".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -207,7 +202,6 @@ fn test_reply() {
             start_time: "100".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -260,7 +254,6 @@ fn test_reply() {
                 start_time: "100".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
-                vesting_ratio: Decimal::from_ratio(5u128, 10u128),
             },
             claimable_amount: Uint128::zero(),
             claimable_staking_rewards: Uint128::zero(),
@@ -280,7 +273,6 @@ fn test_change_owner() {
             start_time: "100".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -325,7 +317,6 @@ fn test_change_owner() {
                 start_time: "100".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
-                vesting_ratio: Decimal::from_ratio(5u128, 10u128),
             },
             claimable_amount: Uint128::zero(),
             claimable_staking_rewards: Uint128::zero(),
@@ -344,7 +335,6 @@ fn claim_native() {
             start_time: "100".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -415,7 +405,6 @@ fn claim_native() {
                 start_time: "100".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
-                vesting_ratio: Decimal::from_ratio(5u128, 10u128),
             },
             claimable_amount: Uint128::zero(),
             claimable_staking_rewards: Uint128::zero(),
@@ -464,7 +453,6 @@ fn claim_native() {
                 start_time: "100".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
-                vesting_ratio: Decimal::from_ratio(5u128, 10u128),
             },
             claimable_amount: Uint128::zero(),
             claimable_staking_rewards: Uint128::zero(),
@@ -488,7 +476,6 @@ fn claim_cw20() {
             start_time: "100".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -571,7 +558,6 @@ fn claim_cw20() {
                 start_time: "100".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
-                vesting_ratio: Decimal::from_ratio(5u128, 10u128),
             },
             claimable_amount: Uint128::zero(),
             claimable_staking_rewards: Uint128::zero(),
@@ -622,7 +608,6 @@ fn claim_cw20() {
                 start_time: "100".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
-                vesting_ratio: Decimal::from_ratio(5u128, 10u128),
             },
             claimable_amount: Uint128::zero(),
             claimable_staking_rewards: Uint128::zero(),
@@ -649,7 +634,6 @@ fn claim_rewards() {
             start_time: "100".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
-            vesting_ratio: Decimal::from_ratio(5u128, 10u128),
         },
     };
 
@@ -698,7 +682,6 @@ fn claim_rewards() {
                 start_time: "100".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
-                vesting_ratio: Decimal::from_ratio(5u128, 10u128),
             },
             claimable_amount: Uint128::new(499999),
             claimable_staking_rewards: Uint128::new(300 + 500),

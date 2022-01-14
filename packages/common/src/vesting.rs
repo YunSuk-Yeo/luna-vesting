@@ -54,7 +54,6 @@ pub struct VestingSchedule {
     pub start_time: String,       // vesting start time in second unit
     pub end_time: String,         // vesting end time in second unit
     pub vesting_interval: String, // vesting interval in second unit
-    pub vesting_ratio: Decimal,   // the ratio will be vested in a interval
 }
 
 impl VestingSchedule {
@@ -102,18 +101,6 @@ impl VestingSchedule {
             ));
         }
 
-        if self.vesting_ratio > Decimal::one() {
-            return Err(StdError::generic_err(
-                "vesting_ratio must be smaller than 1",
-            ));
-        }
-
-        if self.vesting_ratio * Uint128::from(num_interval) != Uint128::new(1) {
-            return Err(StdError::generic_err(
-                "vesting_ratio * num_interval must be 1",
-            ));
-        }
-
         Ok(())
     }
 
@@ -125,8 +112,10 @@ impl VestingSchedule {
             return Ok(vesting_amount);
         }
 
-        let passed_interval = (block_time - start_time) / vesting_interval;
-        Ok((self.vesting_ratio * vesting_amount).checked_mul(Uint128::from(passed_interval))?)
+        let passed_intervals = (block_time - start_time) / vesting_interval;
+        let num_intervals = (end_time - start_time) / vesting_interval;
+        let vesting_ratio = Decimal::from_ratio(1u64, num_intervals);
+        Ok((vesting_ratio * vesting_amount).checked_mul(Uint128::from(passed_intervals))?)
     }
 }
 
@@ -136,7 +125,6 @@ fn vested_amount() {
         start_time: "100".to_string(),
         end_time: "110".to_string(),
         vesting_interval: "5".to_string(),
-        vesting_ratio: Decimal::from_ratio(5u128, 10u128),
     };
 
     let vesting_amount = Uint128::new(1000000u128);

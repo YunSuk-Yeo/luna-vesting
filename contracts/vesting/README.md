@@ -16,7 +16,6 @@ When a initiator enable staking, the deposited LUNA will be converted into bLUNA
           "start_time": "16838388123",
           "end_time": "16838388133",
           "vesting_interval": "1", // vesting interval in second unit
-          "vesting_ratio": "0.1" // deposit_amount * vesting_ratio tokens will be distributed per a interval. Given 0.1, then this schedule requires 10 times distribution
       }
   }
   ```
@@ -35,7 +34,6 @@ When a initiator enable staking, the deposited LUNA will be converted into bLUNA
           "start_time": "16838388123",
           "end_time": "16838388126",
           "vesting_interval": "1", // vesting interval in second unit
-          "vesting_ratio": "0.1" // deposit_amount * vesting_ratio tokens will be distributed per a interval, so 0.1 given then this schedule requires 10 intervals
       }
   }
   ```
@@ -60,4 +58,4 @@ pub enum ExecuteMsg {
 
 | columbus-5 | bombay-12 |
 | ---------- | --------- |
-| N/A        | 33634     |
+| N/A        | 33810     |
