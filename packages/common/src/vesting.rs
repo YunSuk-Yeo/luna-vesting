@@ -108,6 +108,10 @@ impl VestingSchedule {
         let start_time = self.start_time.parse::<u64>().unwrap();
         let end_time = self.end_time.parse::<u64>().unwrap();
         let vesting_interval = self.vesting_interval.parse::<u64>().unwrap();
+        if block_time <= start_time {
+            return Ok(Uint128::zero());
+        }
+
         if block_time >= end_time {
             return Ok(vesting_amount);
         }
