@@ -22,7 +22,7 @@ fn proper_initialization() {
         enable_staking: false,
         staking_info: None,
         vesting_schedule: VestingSchedule {
-            start_time: "100".to_string(),
+            start_time: "105".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
         },
@@ -65,7 +65,7 @@ fn proper_initialization_enable_staking() {
             reward_contract: "reward".to_string(),
         }),
         vesting_schedule: VestingSchedule {
-            start_time: "100".to_string(),
+            start_time: "105".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
         },
@@ -138,7 +138,7 @@ fn invalid_end_time_initialization() {
         enable_staking: false,
         staking_info: None,
         vesting_schedule: VestingSchedule {
-            start_time: "100".to_string(),
+            start_time: "105".to_string(),
             end_time: "100".to_string(),
             vesting_interval: "5".to_string(),
         },
@@ -167,7 +167,7 @@ fn invalid_initialization_enable_staking_without_staking_info() {
         enable_staking: true,
         staking_info: None,
         vesting_schedule: VestingSchedule {
-            start_time: "100".to_string(),
+            start_time: "105".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
         },
@@ -199,7 +199,7 @@ fn test_reply() {
             reward_contract: "reward".to_string(),
         }),
         vesting_schedule: VestingSchedule {
-            start_time: "100".to_string(),
+            start_time: "105".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
         },
@@ -251,7 +251,7 @@ fn test_reply() {
             vesting_amount: Uint128::new(999999u128),
             vested_amount: Uint128::zero(),
             vesting_schedule: VestingSchedule {
-                start_time: "100".to_string(),
+                start_time: "105".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
             },
@@ -270,7 +270,7 @@ fn test_change_owner() {
         enable_staking: false,
         staking_info: None,
         vesting_schedule: VestingSchedule {
-            start_time: "100".to_string(),
+            start_time: "105".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
         },
@@ -314,7 +314,7 @@ fn test_change_owner() {
             vesting_amount: Uint128::new(1000000u128),
             vested_amount: Uint128::zero(),
             vesting_schedule: VestingSchedule {
-                start_time: "100".to_string(),
+                start_time: "105".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
             },
@@ -332,7 +332,7 @@ fn claim_native() {
         enable_staking: false,
         staking_info: None,
         vesting_schedule: VestingSchedule {
-            start_time: "100".to_string(),
+            start_time: "105".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
         },
@@ -402,7 +402,7 @@ fn claim_native() {
             vesting_amount: Uint128::new(1000000),
             vested_amount: Uint128::new(500000),
             vesting_schedule: VestingSchedule {
-                start_time: "100".to_string(),
+                start_time: "105".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
             },
@@ -450,7 +450,7 @@ fn claim_native() {
             vesting_amount: Uint128::new(1000000),
             vested_amount: Uint128::new(1000000),
             vesting_schedule: VestingSchedule {
-                start_time: "100".to_string(),
+                start_time: "105".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
             },
@@ -473,7 +473,7 @@ fn claim_cw20() {
             reward_contract: "reward".to_string(),
         }),
         vesting_schedule: VestingSchedule {
-            start_time: "100".to_string(),
+            start_time: "105".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
         },
@@ -555,7 +555,7 @@ fn claim_cw20() {
             vesting_amount: Uint128::new(999999),
             vested_amount: Uint128::new(499999),
             vesting_schedule: VestingSchedule {
-                start_time: "100".to_string(),
+                start_time: "105".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
             },
@@ -605,7 +605,7 @@ fn claim_cw20() {
             vesting_amount: Uint128::new(999999),
             vested_amount: Uint128::new(999999),
             vesting_schedule: VestingSchedule {
-                start_time: "100".to_string(),
+                start_time: "105".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
             },
@@ -631,7 +631,7 @@ fn claim_rewards() {
             reward_contract: "reward".to_string(),
         }),
         vesting_schedule: VestingSchedule {
-            start_time: "100".to_string(),
+            start_time: "105".to_string(),
             end_time: "110".to_string(),
             vesting_interval: "5".to_string(),
         },
@@ -679,7 +679,7 @@ fn claim_rewards() {
             vesting_amount: Uint128::new(999999),
             vested_amount: Uint128::new(499999),
             vesting_schedule: VestingSchedule {
-                start_time: "100".to_string(),
+                start_time: "105".to_string(),
                 end_time: "110".to_string(),
                 vesting_interval: "5".to_string(),
             },

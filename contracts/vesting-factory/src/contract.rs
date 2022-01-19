@@ -94,6 +94,13 @@ fn create_vesting_contract(
     vesting_schedule: VestingSchedule,
 ) -> StdResult<Response> {
     let config: Config = CONFIG.load(deps.storage)?;
+    if VESTING_CONTRACTS
+        .may_load(deps.storage, owner_address.to_string())?
+        .is_some()
+    {
+        return Err(StdError::generic_err("already exist"));
+    }
+
     TMP_STORE.save(deps.storage, &owner_address)?;
 
     Ok(Response::new().add_submessage(SubMsg::reply_on_success(

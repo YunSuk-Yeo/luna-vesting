@@ -94,8 +94,7 @@ impl VestingSchedule {
         }
 
         let time_period = end_time - start_time;
-        let num_interval = time_period / vesting_interval;
-        if time_period != num_interval * vesting_interval {
+        if time_period != (time_period / vesting_interval) * vesting_interval {
             return Err(StdError::generic_err(
                 "(end_time - start_time) must be multiple of vesting_interval",
             ));
@@ -108,7 +107,7 @@ impl VestingSchedule {
         let start_time = self.start_time.parse::<u64>().unwrap();
         let end_time = self.end_time.parse::<u64>().unwrap();
         let vesting_interval = self.vesting_interval.parse::<u64>().unwrap();
-        if block_time <= start_time {
+        if block_time < start_time {
             return Ok(Uint128::zero());
         }
 
@@ -116,8 +115,8 @@ impl VestingSchedule {
             return Ok(vesting_amount);
         }
 
-        let passed_intervals = (block_time - start_time) / vesting_interval;
-        let num_intervals = (end_time - start_time) / vesting_interval;
+        let passed_intervals = 1u64 + (block_time - start_time) / vesting_interval;
+        let num_intervals = 1u64 + (end_time - start_time) / vesting_interval;
         let vesting_ratio = Decimal::from_ratio(1u64, num_intervals);
         Ok((vesting_ratio * vesting_amount).checked_mul(Uint128::from(passed_intervals))?)
     }
@@ -126,7 +125,7 @@ impl VestingSchedule {
 #[test]
 fn vested_amount() {
     let schedule = VestingSchedule {
-        start_time: "100".to_string(),
+        start_time: "105".to_string(),
         end_time: "110".to_string(),
         vesting_interval: "5".to_string(),
     };

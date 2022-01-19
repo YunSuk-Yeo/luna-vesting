@@ -58,4 +58,4 @@ pub enum ExecuteMsg {
 
 | columbus-5 | bombay-12 |
 | ---------- | --------- |
-| N/A        | 35328     |
+| N/A        | 35331     |
