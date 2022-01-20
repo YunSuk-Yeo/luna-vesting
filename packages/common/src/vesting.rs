@@ -83,7 +83,7 @@ impl VestingSchedule {
             return Err(StdError::generic_err("invalid start_time"));
         }
 
-        if end_time <= start_time {
+        if end_time < start_time {
             return Err(StdError::generic_err(
                 "end_time must be bigger than start_time",
             ));

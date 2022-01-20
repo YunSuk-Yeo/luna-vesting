@@ -51,4 +51,4 @@ pub enum QueryMsg {
 
 | columbus-5 | bombay-12                                    |
 | ---------- | -------------------------------------------- |
-| N/A        | terra1fnsx4tv8nlqrrrt920ek28m2mt5svk7yw5xaah |
+| N/A        | terra1r6rpacgyetmlked6u3eap70w3fgvx67yuwsd3v |
