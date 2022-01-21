@@ -124,7 +124,7 @@ fn invalid_start_time_initialization() {
     );
 
     let mut env = mock_env();
-    env.block.time = Timestamp::from_seconds(100);
+    env.block.time = Timestamp::from_seconds(105);
 
     let _res = instantiate(deps.as_mut(), env, info, msg).unwrap_err();
 }
