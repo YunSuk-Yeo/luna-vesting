@@ -5,7 +5,7 @@ The contract will be generated per a vesting account to separate staking rewards
 
 ### Initiate Contract
 
-When a initiator enable staking, the deposited LUNA will be converted into bLUNA via Anchor Hub Contract.
+When a initiator enable staking, the withdraw address of staking rewards will be set to `owner_address`.
 
 * disable staking
   ```json
@@ -24,12 +24,6 @@ When a initiator enable staking, the deposited LUNA will be converted into bLUNA
   {
       "owner_address": "terra1~~",
       "enable_staking": true,
-      // refer here: https://docs.anchorprotocol.com/smart-contracts/deployed-contracts#bluna-smart-contracts
-      "staking_info": { 
-          "bluna_token": "terra1~~",
-          "hub_contract": "terra1~~",
-          "reward_contract": "terra1~~",
-      },
       "vesting_schedule": {
           "start_time": "16838388123",
           "end_time": "16838388126",
@@ -40,17 +34,39 @@ When a initiator enable staking, the deposited LUNA will be converted into bLUNA
 
 ### Vesting Account Operations
 
-* ChangeOwner - change claim privileged account address to other address
+* ChangeOwner - change claim privileged account address to other address, the withdraw address of staking rewards will be set to new `owner_address`.
 * Claim - send newly vested token to the (`recipient` or `vesting_account`). The `claim_amount` is computed as (`vested_amount` - `claimed_amount`) and `claimed_amount` is updated to `vested_amount`.
-* ClaimRewards - send bLUNA staking rewards to the given recipient address. This function only can be executed when `staking_enabled` is true
+* ClaimRewards - withdraw staking rewards to `owner_address`. This function only can be executed when `staking_enabled` is true
+* Delegate - relay delegate message 
+* Undelegate - relay unbond message 
+* Redelegate - relay redelegate message
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum ExecuteMsg {
-    ChangeOwner { new_owner: String },
-    Claim { recipient: Option<String> },
-    ClaimRewards { recipient: Option<String> },
+    ChangeOwner {
+        new_owner: String,
+    },
+    Claim {
+        recipient: Option<String>,
+    },
+    ClaimRewards {
+        validators: Vec<String>,
+    },
+    Delegate {
+        validator: String,
+        amount: Uint128,
+    },
+    Undelegate {
+        validator: String,
+        amount: Uint128,
+    },
+    Redelegate {
+        src_validator: String,
+        dst_validator: String,
+        amount: Uint128,
+    },
 }
 ```
 
@@ -58,4 +74,4 @@ pub enum ExecuteMsg {
 
 | columbus-5 | bombay-12 |
 | ---------- | --------- |
-| N/A        | 35446     |
+| N/A        | 37363     |

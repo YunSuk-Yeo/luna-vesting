@@ -9,9 +9,6 @@ This contract is to generate vesting contract and manage instantiated vesting co
 /// to anchor contract infos
 #[derive(Serialize, Deserialize, JsonSchema)]
 pub struct InstantiateMsg {
-    pub bluna_token: String,
-    pub hub_contract: String,
-    pub reward_contract: String,
     pub vesting_contract_code_id: u64,
 }
 ```
@@ -45,10 +42,10 @@ pub enum QueryMsg {
 
 | columbus-5 | bombay-12 |
 | ---------- | --------- |
-| N/A        | 35332     |
+| N/A        | 37364     |
 
 ### Deployed Contract Address
 
 | columbus-5 | bombay-12                                    |
 | ---------- | -------------------------------------------- |
-| N/A        | terra1r6rpacgyetmlked6u3eap70w3fgvx67yuwsd3v |
+| N/A        | terra1cyutafh94f0lkq0whrwlxnahu8ykehvmmrexdt |

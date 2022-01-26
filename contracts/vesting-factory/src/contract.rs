@@ -1,5 +1,5 @@
 use common::{
-    vesting::{InstantiateMsg as VestingInstantiateMsg, StakingInfo, VestingSchedule},
+    vesting::{InstantiateMsg as VestingInstantiateMsg, VestingSchedule},
     vesting_factory::{ExecuteMsg, InstantiateMsg, QueryMsg, VestingContractResponse},
 };
 #[cfg(not(feature = "library"))]
@@ -20,17 +20,9 @@ pub fn instantiate(
     _info: MessageInfo,
     msg: InstantiateMsg,
 ) -> StdResult<Response> {
-    // validate addresses
-    deps.api.addr_validate(&msg.bluna_token)?;
-    deps.api.addr_validate(&msg.hub_contract)?;
-    deps.api.addr_validate(&msg.reward_contract)?;
-
     CONFIG.save(
         deps.storage,
         &Config {
-            bluna_token: msg.bluna_token,
-            hub_contract: msg.hub_contract,
-            reward_contract: msg.reward_contract,
             vesting_contract_code_id: msg.vesting_contract_code_id,
         },
     )?;
@@ -111,15 +103,6 @@ fn create_vesting_contract(
                 owner_address,
                 enable_staking,
                 vesting_schedule,
-                staking_info: if enable_staking {
-                    Some(StakingInfo {
-                        bluna_token: config.bluna_token,
-                        hub_contract: config.hub_contract,
-                        reward_contract: config.reward_contract,
-                    })
-                } else {
-                    None
-                },
             })?,
             funds: info.funds,
             label: "".to_string(),

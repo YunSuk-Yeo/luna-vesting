@@ -1,5 +1,4 @@
 use cosmwasm_std::{Decimal, StdError, StdResult, Uint128};
-use cw20::Denom;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -7,16 +6,34 @@ use serde::{Deserialize, Serialize};
 pub struct InstantiateMsg {
     pub owner_address: String,
     pub enable_staking: bool,
-    pub staking_info: Option<StakingInfo>,
     pub vesting_schedule: VestingSchedule,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum ExecuteMsg {
-    ChangeOwner { new_owner: String },
-    Claim { recipient: Option<String> },
-    ClaimRewards { recipient: Option<String> },
+    ChangeOwner {
+        new_owner: String,
+    },
+    Claim {
+        recipient: Option<String>,
+    },
+    ClaimRewards {
+        validators: Vec<String>,
+    },
+    Delegate {
+        validator: String,
+        amount: Uint128,
+    },
+    Undelegate {
+        validator: String,
+        amount: Uint128,
+    },
+    Redelegate {
+        src_validator: String,
+        dst_validator: String,
+        amount: Uint128,
+    },
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -28,20 +45,10 @@ pub enum QueryMsg {
 #[derive(Serialize, Deserialize, JsonSchema, PartialEq, Debug)]
 pub struct VestingInfoResponse {
     pub owner_address: String,
-    pub vesting_denom: Denom,
     pub vesting_amount: Uint128,
     pub vested_amount: Uint128,
     pub vesting_schedule: VestingSchedule,
     pub claimable_amount: Uint128,
-    pub claimable_staking_rewards: Uint128,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
-pub struct StakingInfo {
-    pub bluna_token: String,
-    pub hub_contract: String,
-    pub reward_contract: String,
 }
 
 /// VestingSchedule is used to vest tokens

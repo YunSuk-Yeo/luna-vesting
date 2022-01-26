@@ -9,8 +9,5 @@ pub const VESTING_CONTRACTS: Map<String, String> = Map::new("vesting_contracts")
 
 #[derive(Serialize, Deserialize, Clone, PartialEq, JsonSchema, Debug)]
 pub struct Config {
-    pub bluna_token: String,
-    pub hub_contract: String,
-    pub reward_contract: String,
     pub vesting_contract_code_id: u64,
 }
