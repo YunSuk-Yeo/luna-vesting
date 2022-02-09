@@ -722,5 +722,8 @@ fn claim_rewards() {
             }),
         ]
     );
-    assert_eq!(res.attributes, vec![("action", "claim_rewards"),],);
+    assert_eq!(
+        res.attributes,
+        vec![("action", "claim_rewards"), ("rewards_claim_amount", "800")],
+    );
 }

@@ -256,12 +256,15 @@ fn claim_rewards(
     }
 
     let mut messages: Vec<CosmosMsg> = vec![];
+    let mut rewards_claim_amount = Uint128::zero();
 
     // check reward_denom balance
     let existing_rewards: Coin = deps
         .querier
         .query_balance(env.contract.address.to_string(), REWARDS_DENOM)?;
     if !existing_rewards.amount.is_zero() {
+        rewards_claim_amount += existing_rewards.amount;
+
         messages.push(
             BankMsg::Send {
                 to_address: recipient.clone(),
@@ -280,6 +283,8 @@ fn claim_rewards(
         },
     )?;
     if !response.rewards.is_zero() {
+        rewards_claim_amount += response.rewards;
+
         messages.push(
             WasmMsg::Execute {
                 contract_addr: staking_info.reward_contract,
@@ -292,9 +297,13 @@ fn claim_rewards(
         );
     }
 
-    Ok(Response::new()
-        .add_messages(messages)
-        .add_attributes(vec![("action", "claim_rewards")]))
+    Ok(Response::new().add_messages(messages).add_attributes(vec![
+        ("action", "claim_rewards"),
+        (
+            "rewards_claim_amount",
+            rewards_claim_amount.to_string().as_str(),
+        ),
+    ]))
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]
