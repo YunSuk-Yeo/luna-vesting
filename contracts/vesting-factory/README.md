@@ -18,6 +18,7 @@ pub struct InstantiateMsg {
 
 ### Execute Contract
 * CreateVestingContract - instantiate vesting contract and store owner-vesting contract pair info to store
+* ChangeVestingOwner - change the owner address to the other address 
 
 When a initiator enable staking, the deposited LUNA will be converted into bLUNA via Anchor Hub Contract.
 ```rust
@@ -28,6 +29,9 @@ pub enum ExecuteMsg {
         owner_address: String,
         enable_staking: bool,
         vesting_schedule: VestingSchedule,
+    },
+    ChangeVestingOwner {
+        new_owner: String,
     },
 }
 ```
@@ -45,10 +49,10 @@ pub enum QueryMsg {
 
 | columbus-5 | bombay-12 |
 | ---------- | --------- |
-| N/A        | 35332     |
+| N/A        | 42953     |
 
 ### Deployed Contract Address
 
 | columbus-5 | bombay-12                                    |
 | ---------- | -------------------------------------------- |
-| N/A        | terra1r6rpacgyetmlked6u3eap70w3fgvx67yuwsd3v |
+| N/A        | terra1rfep5m6lucwxx9fz488fvrrlyrzxrdm4av74rg |

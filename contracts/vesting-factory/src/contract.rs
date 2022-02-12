@@ -53,6 +53,7 @@ pub fn execute(deps: DepsMut, env: Env, info: MessageInfo, msg: ExecuteMsg) -> S
             enable_staking,
             vesting_schedule,
         ),
+        ExecuteMsg::ChangeVestingOwner { new_owner } => change_vesting_owner(deps, info, new_owner),
     }
 }
 
@@ -126,6 +127,33 @@ fn create_vesting_contract(
         }),
         1,
     )))
+}
+
+fn change_vesting_owner(
+    deps: DepsMut,
+    info: MessageInfo,
+    new_owner: String,
+) -> StdResult<Response> {
+    let owner_address = info.sender;
+    let vesting_contract_address =
+        VESTING_CONTRACTS.may_load(deps.storage, owner_address.to_string())?;
+    if vesting_contract_address.is_none() {
+        return Err(StdError::generic_err("vesting contract not found"));
+    }
+
+    let vesting_contract_address = vesting_contract_address.unwrap();
+    VESTING_CONTRACTS.remove(deps.storage, owner_address.to_string());
+    VESTING_CONTRACTS.save(
+        deps.storage,
+        new_owner.to_string(),
+        &vesting_contract_address,
+    )?;
+
+    Ok(Response::new().add_attributes(vec![
+        ("action", "change_vesting_owner"),
+        ("new_owner", &new_owner),
+        ("vesting_contract", &vesting_contract_address),
+    ]))
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]

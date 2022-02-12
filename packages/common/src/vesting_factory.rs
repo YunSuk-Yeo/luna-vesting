@@ -18,6 +18,9 @@ pub enum ExecuteMsg {
         enable_staking: bool,
         vesting_schedule: VestingSchedule,
     },
+    ChangeVestingOwner {
+        new_owner: String,
+    },
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
